@@ -21,9 +21,11 @@ import { ChildBComponent } from '../child-b/child-b.component';
 
 
 @Component({
-  selector: 'app-parent',
-  templateUrl: './parent.component.html',
-  styleUrls: [ './parent.component.css' ]
+    selector: 'app-parent',
+    templateUrl: './parent.component.html',
+    styleUrls: ['./parent.component.css'],
+    standalone: true,
+    imports: [ChildAComponent]
 })
 export class ParentComponent implements OnChanges,
                                         OnInit,
@@ -40,8 +42,6 @@ export class ParentComponent implements OnChanges,
   @ContentChild(ChildAComponent) contentChildA!: ChildAComponent; // always undefined not a part of the content
   @ContentChild(ChildBComponent) contentChildB!: ChildBComponent; // part of the content
   @ContentChildren(ChildBComponent) cDirs!: QueryList<ChildBComponent>;
-
-  constructor () {}
 
   ngOnChanges (changes: SimpleChanges) {
     console.log('ngOnChanges');
