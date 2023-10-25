@@ -10,6 +10,18 @@ export const appRoutes: Routes = [
         m => m.CrisisListComponent
       ),
   },
+  {
+    path: 'mods',
+    loadComponent: () =>
+      import('./host-parent/host-parent.component').then(
+        m => m.HostParentComponent
+      ),
+  },
+  {
+    path: 'lifecycle',
+    loadComponent: () =>
+      import('./lifecycle/lifecycle.component').then(m => m.LifecycleComponent),
+  },
   { path: 'heroes', component: HeroListComponent },
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
