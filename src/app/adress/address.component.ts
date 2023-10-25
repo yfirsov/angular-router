@@ -4,8 +4,10 @@ import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
+  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 
@@ -18,6 +20,11 @@ import {
       useExisting: forwardRef(() => AddressComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => AddressComponent),
+      multi: true,
+    },
   ],
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './address.component.html',
@@ -26,10 +33,7 @@ import {
 export class AddressComponent implements ControlValueAccessor {
   addressForm: FormGroup = new FormGroup({
     addressLine: new FormControl('', [Validators.required]),
-    areaCode: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(5),
-    ]),
+    zip: new FormControl('', [Validators.required, Validators.maxLength(5)]),
   });
   onTouched: (() => void) | undefined;
 
@@ -49,5 +53,17 @@ export class AddressComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.addressForm.disable() : this.addressForm.enable();
+  }
+
+  validate(): ValidationErrors | null {
+    console.log('Address validation');
+    return this.addressForm.valid
+      ? null
+      : {
+          invalidForm: {
+            valid: false,
+            message: 'address fields are invalid',
+          },
+        };
   }
 }

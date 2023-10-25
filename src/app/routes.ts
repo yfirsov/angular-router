@@ -27,6 +27,14 @@ export const appRoutes: Routes = [
     loadComponent: () =>
       import('./lifecycle/lifecycle.component').then(m => m.LifecycleComponent),
   },
+  {
+    path: 'billing-info',
+    title: 'Billing Info',
+    loadComponent: () =>
+      import('./billing-info/billing-info.component').then(
+        m => m.BillingInfoComponent
+      ),
+  },
   { path: 'heroes', component: HeroListComponent },
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
   {

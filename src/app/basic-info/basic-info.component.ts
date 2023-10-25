@@ -1,7 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -57,8 +56,8 @@ export class BasicInfoComponent implements ControlValueAccessor {
     isDisabled ? this.basicInfoForm.disable() : this.basicInfoForm.enable();
   }
 
-  validate(c: AbstractControl): ValidationErrors | null {
-    console.log('Basic Info validation', c);
+  validate(): ValidationErrors | null {
+    console.log('Basic Info validation');
     return this.basicInfoForm.valid
       ? null
       : {
