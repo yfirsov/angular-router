@@ -2,9 +2,11 @@
   <div class="row">
     <label for="firstName">Full Name</label>
     <input type="text" formControlName="firstName" id="firstName" class="" />
+    <app-validation-errors [control]="firstName" />
   </div>
   <div class="row">
     <label for="Email">Email</label>
     <input type="text" formControlName="email" id="email" class="" />
+    <app-validation-errors [control]="email" />
   </div>
 </ng-container>

@@ -23,7 +23,6 @@ export class BillingInfoComponent {
   });
 
   public onSubmit() {
-    console.log(this.nestedForm.valid);
     console.log('Billing Info', this.nestedForm.value);
   }
 }

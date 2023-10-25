@@ -1,7 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ControlValueAccessor,
   FormControl,
   FormGroup,
   NG_VALIDATORS,
@@ -10,6 +9,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { ControlValueAccessorDirective } from './control-value-accessor.directive';
+import { ValidationErrorsComponent } from './validation-errors/validation-errors.component';
 
 @Component({
   selector: 'app-basic-info',
@@ -26,38 +27,24 @@ import {
       multi: true,
     },
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ValidationErrorsComponent],
   templateUrl: './basic-info.component.html',
   styleUrls: ['./basic-info.component.css'],
 })
-export class BasicInfoComponent implements ControlValueAccessor {
+export class BasicInfoComponent extends ControlValueAccessorDirective<FormGroup> {
+  firstName = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
   basicInfoForm: FormGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    firstName: this.firstName,
+    email: this.email,
   });
 
-  onTouched: (() => void) | undefined;
-
-  registerOnChange(fn: never): void {
-    console.log('on change');
-    this.basicInfoForm.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: never): void {
-    console.log('on blur');
-    this.onTouched = fn;
-  }
-
-  writeValue(obj: never): void {
-    obj && this.basicInfoForm.setValue(obj);
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    isDisabled ? this.basicInfoForm.disable() : this.basicInfoForm.enable();
+  constructor() {
+    super();
+    this.form = this.basicInfoForm;
   }
 
   validate(): ValidationErrors | null {
-    console.log('Basic Info validation');
     return this.basicInfoForm.valid
       ? null
       : {

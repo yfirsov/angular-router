@@ -1,7 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ControlValueAccessor,
   FormControl,
   FormGroup,
   NG_VALIDATORS,
@@ -10,6 +9,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { ControlValueAccessorDirective } from '../basic-info/control-value-accessor.directive';
 
 @Component({
   selector: 'app-address',
@@ -30,33 +30,18 @@ import {
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
 })
-export class AddressComponent implements ControlValueAccessor {
+export class AddressComponent extends ControlValueAccessorDirective<FormGroup> {
   addressForm: FormGroup = new FormGroup({
     addressLine: new FormControl('', [Validators.required]),
     zip: new FormControl('', [Validators.required, Validators.maxLength(5)]),
   });
-  onTouched: (() => void) | undefined;
 
-  registerOnChange(fn: never): void {
-    console.log('on change');
-    this.addressForm.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: never): void {
-    console.log('on blur');
-    this.onTouched = fn;
-  }
-
-  writeValue(obj: never): void {
-    obj && this.addressForm.setValue(obj, { emitEvent: false });
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    isDisabled ? this.addressForm.disable() : this.addressForm.enable();
+  constructor() {
+    super();
+    this.form = this.addressForm;
   }
 
   validate(): ValidationErrors | null {
-    console.log('Address validation');
     return this.addressForm.valid
       ? null
       : {

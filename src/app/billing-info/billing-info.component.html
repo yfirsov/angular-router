@@ -4,4 +4,6 @@
     <app-address formControlName="address"></app-address>
     <button type="submit" [disabled]="nestedForm.invalid">Place Order</button>
   </form>
+  <p>Form: {{ nestedForm.value | json }}</p>
+  <p>Valid: {{ nestedForm.valid }}</p>
 </div>
