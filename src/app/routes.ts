@@ -15,6 +15,7 @@ export const appRoutes: Routes = [
   { path: 'heroes', title: 'Heroes', component: HeroListComponent },
   {
     path: 'mods',
+    title: 'Resolution modifiers',
     loadComponent: () =>
       import('./host-parent/host-parent.component').then(
         m => m.HostParentComponent
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'lifecycle',
+    title: 'Component Lifecycle',
     loadComponent: () =>
       import('./lifecycle/lifecycle.component').then(m => m.LifecycleComponent),
   },
