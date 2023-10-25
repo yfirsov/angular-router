@@ -1,16 +1,39 @@
-import { Routes } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { RouterStateSnapshot, Routes, TitleStrategy } from '@angular/router';
 import { HeroListComponent } from './hero-list/hero-list.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const appRoutes: Routes = [
   {
     path: 'crisis-center',
+    title: 'Crisis Center',
     loadComponent: () =>
       import('./crisis-list/crisis-list.component').then(
         m => m.CrisisListComponent
       ),
   },
-  { path: 'heroes', component: HeroListComponent },
+  { path: 'heroes', title: 'Heroes', component: HeroListComponent },
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: '**',
+    title: '404',
+    loadComponent: () =>
+      import('./page-not-found/page-not-found.component').then(
+        m => m.PageNotFoundComponent
+      ),
+  },
 ];
+
+@Injectable({ providedIn: 'root' })
+export class TemplatePageTitleStrategy extends TitleStrategy {
+  constructor(private readonly title: Title) {
+    super();
+  }
+
+  override updateTitle(routerState: RouterStateSnapshot) {
+    const title = this.buildTitle(routerState);
+    if (title !== undefined) {
+      this.title.setTitle(`My Application | ${title}`);
+    }
+  }
+}

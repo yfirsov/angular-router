@@ -1,0 +1,14 @@
+<ng-container [formGroup]="addressForm">
+  <div class="row">
+    <label for="addressLine"> Street Address </label>
+    <input
+      type="text"
+      formControlName="addressLine"
+      id="addressLine"
+      class="" />
+  </div>
+  <div class="row">
+    <label for="Area"> Area Code </label>
+    <input type="text" formControlName="areaCode" id="Area" class="" />
+  </div>
+</ng-container>
