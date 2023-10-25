@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChildBComponent } from '../child-b/child-b.component';
 import { ParentComponent } from '../parent/parent.component';
@@ -9,5 +9,6 @@ import { ParentComponent } from '../parent/parent.component';
   imports: [CommonModule, ChildBComponent, ParentComponent],
   templateUrl: './lifecycle.component.html',
   styleUrls: ['./lifecycle.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LifecycleComponent {}

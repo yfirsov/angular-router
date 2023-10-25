@@ -21,6 +21,5 @@ import { HighlightDirective } from './highlight.directive';
   ],
 })
 export class AppComponent {
-  title = 'Angular Router';
   color = 'yellow';
 }
