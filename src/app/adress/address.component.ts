@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ControlValueAccessorDirective } from '../basic-info/control-value-accessor.directive';
+import { ValidationErrorsComponent } from '../validation-errors/validation-errors.component';
 
 @Component({
   selector: 'app-address',
@@ -26,15 +27,21 @@ import { ControlValueAccessorDirective } from '../basic-info/control-value-acces
       multi: true,
     },
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ValidationErrorsComponent],
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
 })
 export class AddressComponent extends ControlValueAccessorDirective<FormGroup> {
+  addressLine = new FormControl('', [Validators.required]);
+  zip = new FormControl('', [Validators.required, Validators.maxLength(5)]);
   addressForm: FormGroup = new FormGroup({
-    addressLine: new FormControl('', [Validators.required]),
-    zip: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+    addressLine: this.addressLine,
+    zip: this.zip,
   });
+
+  errorMessages: Record<string, string> = {
+    maxlength: 'Zip should have not more than 5 numbers',
+  };
 
   constructor() {
     super();

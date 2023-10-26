@@ -6,9 +6,13 @@
       formControlName="addressLine"
       id="addressLine"
       class="form-control" />
+    <app-validation-errors [control]="addressLine" />
   </div>
   <div class="row">
     <label for="Zip">Zip</label>
     <input type="text" formControlName="zip" id="Zip" class="form-control" />
+    <app-validation-errors
+      [control]="zip"
+      [customErrorMessages]="errorMessages" />
   </div>
 </ng-container>

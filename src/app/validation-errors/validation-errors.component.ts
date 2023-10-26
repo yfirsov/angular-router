@@ -15,6 +15,7 @@ export class ValidationErrorsComponent implements OnChanges {
   errorMessages: Record<string, string> = {
     required: 'This field is required',
     email: 'Wrong email pattern',
+    maxLength: 'Exceeded the allowed length',
   };
 
   ngOnChanges(changes: SimpleChanges): void {
