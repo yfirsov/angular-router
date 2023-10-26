@@ -5,10 +5,12 @@
     <button
       type="submit"
       [disabled]="nestedForm.invalid"
-      class="btn btn-success">
+      class="btn btn-success row mt-2">
       Submit
     </button>
   </form>
   <p>Form: {{ nestedForm.value | json }}</p>
   <p>Valid: {{ nestedForm.valid }}</p>
 </div>
+<p>Form: {{ nestedForm.value | json }}</p>
+<p>Valid: {{ nestedForm.valid }}</p>

@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ControlValueAccessorDirective } from './control-value-accessor.directive';
-import { ValidationErrorsComponent } from './validation-errors/validation-errors.component';
+import { ValidationErrorsComponent } from '../validation-errors/validation-errors.component';
 
 @Component({
   selector: 'app-basic-info',
