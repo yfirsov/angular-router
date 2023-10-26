@@ -36,7 +36,7 @@ export const appRoutes: Routes = [
       ),
   },
   { path: 'heroes', component: HeroListComponent },
-  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
+  { path: '', redirectTo: '/mods', pathMatch: 'full' },
   {
     path: '**',
     title: '404',

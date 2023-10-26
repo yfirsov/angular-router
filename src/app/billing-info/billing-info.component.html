@@ -2,7 +2,12 @@
   <form [formGroup]="nestedForm" (ngSubmit)="onSubmit()">
     <app-basic-info formControlName="basicInfo"></app-basic-info>
     <app-address formControlName="address"></app-address>
-    <button type="submit" [disabled]="nestedForm.invalid">Place Order</button>
+    <button
+      type="submit"
+      [disabled]="nestedForm.invalid"
+      class="btn btn-success">
+      Submit
+    </button>
   </form>
   <p>Form: {{ nestedForm.value | json }}</p>
   <p>Valid: {{ nestedForm.valid }}</p>

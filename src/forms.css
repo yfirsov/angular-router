@@ -1,0 +1,13 @@
+input[type="text"] {
+  box-sizing: border-box;
+  width: 100%;
+  padding: .5rem;
+}
+
+.ng-valid:not(.ng-untouched), .ng-valid.required:not(.ng-untouched)  {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form):not(.ng-untouched)  {
+  border-left: 5px solid #a94442;
+}
