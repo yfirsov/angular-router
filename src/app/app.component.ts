@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BillingInfoComponent } from './billing-info/billing-info.component';
 import { ChildBComponent } from './child-b/child-b.component';
 import { ParentComponent } from './parent/parent.component';
@@ -8,7 +9,7 @@ import { HighlightDirective } from './highlight.directive';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [
     HighlightDirective,
@@ -18,6 +19,7 @@ import { HighlightDirective } from './highlight.directive';
     ChildBComponent,
     RouterOutlet,
     BillingInfoComponent,
+    MatToolbarModule,
   ],
 })
 export class AppComponent {

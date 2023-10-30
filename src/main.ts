@@ -1,13 +1,5 @@
-import { importProvidersFrom } from '@angular/core';
-import { provideRouter, TitleStrategy } from '@angular/router';
+import { appConfig } from './app.config';
 import { AppComponent } from './app/app.component';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { appRoutes, TemplatePageTitleStrategy } from './app/routes';
+import { bootstrapApplication } from '@angular/platform-browser';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(BrowserModule),
-    provideRouter(appRoutes),
-    { provide: TitleStrategy, useClass: TemplatePageTitleStrategy },
-  ],
-}).catch(err => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch(err => console.error(err));

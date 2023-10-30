@@ -1,6 +1,11 @@
-<nav>
-  <a routerLink="/mods" routerLinkActive="active">Resolution Mods</a>
-  <a routerLink="/lifecycle" routerLinkActive="active">Lifecycle</a>
-  <a routerLink="/billing-info" routerLinkActive="active">Billing Info</a>
-</nav>
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar">
+  <nav>
+    <a routerLink="/scientists" routerLinkActive="active">Scientists</a>
+    <a routerLink="/mods" routerLinkActive="active">Resolution Mods</a>
+    <a routerLink="/lifecycle" routerLinkActive="active">Lifecycle</a>
+    <a routerLink="/billing-info" routerLinkActive="active">Billing Info</a>
+  </nav>
+</mat-toolbar>
+<main class="content mat-elevation-z2">
+  <router-outlet></router-outlet>
+</main>

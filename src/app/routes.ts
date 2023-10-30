@@ -12,7 +12,14 @@ export const appRoutes: Routes = [
         m => m.CrisisListComponent
       ),
   },
-  { path: 'heroes', title: 'Heroes', component: HeroListComponent },
+  {
+    path: 'scientists',
+    title: 'Scientists',
+    loadComponent: () =>
+      import('./scientists/scientists.component').then(
+        m => m.ScientistsComponent
+      ),
+  },
   {
     path: 'mods',
     title: 'Resolution modifiers',
