@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Store } from '@ngrx/store';
 import { Scientist } from './scientists.model';
-import { scientistsPageActions } from './state/scientists-page.actions';
+import { ScientistsPageActions } from './state/scientists-page.actions';
 import {
   selectIsLoading,
   selectScientists,
@@ -26,10 +26,10 @@ export class ScientistsComponent implements OnInit {
   isLoading$ = this.store.select(selectIsLoading);
 
   ngOnInit() {
-    this.store.dispatch(scientistsPageActions.load());
+    this.store.dispatch(ScientistsPageActions.load());
   }
 
   selectScientist(scientist: Scientist) {
-    this.store.dispatch(scientistsPageActions.select(scientist));
+    this.store.dispatch(ScientistsPageActions.select(scientist));
   }
 }

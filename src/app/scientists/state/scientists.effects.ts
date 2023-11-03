@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ScientistsService } from '../scientists.service';
-import { scientistsPageActions } from './scientists-page.actions';
-import { scientistsActionsAPI } from './scientists.actions';
+import { ScientistsPageActions } from './scientists-page.actions';
+import { ScientistsActionsAPI } from './scientists.actions';
 
 export const loadScientists = createEffect(
   (
@@ -12,14 +12,14 @@ export const loadScientists = createEffect(
     scientistsService = inject(ScientistsService)
   ) => {
     return actions$.pipe(
-      ofType(scientistsPageActions.load),
+      ofType(ScientistsPageActions.load),
       switchMap(() =>
         scientistsService.scientists$.pipe(
           map(scientists =>
-            scientistsActionsAPI.loadScientistsSuccess({ scientists })
+            ScientistsActionsAPI.scientistsLoadedSuccess({ scientists })
           ),
           catchError(error =>
-            of(scientistsActionsAPI.loadScientistsFailure({ error }))
+            of(ScientistsActionsAPI.scientistsLoadedFailure({ error }))
           )
         )
       )
