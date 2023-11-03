@@ -1,19 +1,21 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { ScientistsPageActions } from './scientists-page.actions';
 import { ScientistsActionsAPI } from './scientists.actions';
 import { Scientist } from '../scientists.model';
 
-export interface ScientistsState {
-  scientists: Scientist[];
+export interface ScientistsState extends EntityState<Scientist> {
   isLoading: boolean;
   selectedId: number | null;
 }
 
-export const initialState: ScientistsState = {
-  scientists: [],
+export const adapter: EntityAdapter<Scientist> =
+  createEntityAdapter<Scientist>();
+
+export const initialState: ScientistsState = adapter.getInitialState({
   isLoading: false,
   selectedId: null,
-};
+});
 
 export const scientistsFeature = createFeature({
   name: 'scientists',
@@ -33,9 +35,7 @@ export const scientistsFeature = createFeature({
     on(
       ScientistsActionsAPI.scientistsLoadedSuccess,
       (state, { scientists }): ScientistsState => ({
-        ...state,
-        scientists,
-        isLoading: false,
+        ...adapter.setAll(scientists, { ...state, isLoading: false }),
       })
     ),
     on(
@@ -46,18 +46,16 @@ export const scientistsFeature = createFeature({
       })
     )
   ),
-  extraSelectors: ({ selectSelectedId, selectScientists }) => ({
+  extraSelectors: ({
+    selectSelectedId,
+    selectEntities,
+    selectScientistsState,
+  }) => ({
+    ...adapter.getSelectors(selectScientistsState),
     selectSelectedScientist: createSelector(
       selectSelectedId,
-      selectScientists,
-      (selectedId, scientists) => scientists.find(s => s.id === selectedId)
+      selectEntities,
+      (selectedId, scientists) => (selectedId ? scientists[selectedId] : null)
     ),
   }),
 });
-
-export const {
-  name,
-  selectScientists,
-  selectIsLoading,
-  selectSelectedScientist,
-} = scientistsFeature;

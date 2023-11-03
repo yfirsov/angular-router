@@ -5,11 +5,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Store } from '@ngrx/store';
 import { Scientist } from './scientists.model';
 import { ScientistsPageActions } from './state/scientists-page.actions';
-import {
-  selectIsLoading,
-  selectScientists,
-  selectSelectedScientist,
-} from './state/scientists.reducer';
+import { scientistsFeature } from './state/scientists.reducer';
 
 @Component({
   selector: 'app-scientists',
@@ -21,9 +17,11 @@ import {
 export class ScientistsComponent implements OnInit {
   store = inject(Store);
 
-  scientists$ = this.store.select(selectScientists);
-  selectedScientist$ = this.store.select(selectSelectedScientist);
-  isLoading$ = this.store.select(selectIsLoading);
+  scientists$ = this.store.select(scientistsFeature.selectAll);
+  selectedScientist$ = this.store.select(
+    scientistsFeature.selectSelectedScientist
+  );
+  isLoading$ = this.store.select(scientistsFeature.selectIsLoading);
 
   ngOnInit() {
     this.store.dispatch(ScientistsPageActions.load());
