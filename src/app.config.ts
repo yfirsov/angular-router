@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy } from '@angular/router';
@@ -8,6 +12,7 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { metaReducers, reducers } from './app/reducers';
 import { appRoutes, TemplatePageTitleStrategy } from './app/routes';
 import * as scientistsEffects from './app/scientists/state/scientists.effects';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,5 +33,9 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(),
     provideAnimations(),
     provideEffects(scientistsEffects),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };
